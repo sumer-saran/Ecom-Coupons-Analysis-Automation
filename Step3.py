@@ -10,7 +10,7 @@ df_filtered = df[df['coupons'].notnull()]
 # Find the first usage date of each coupon
 first_usage_dates = df_filtered.groupby('coupons')['Order Date & Time'].min().reset_index()
 
-# Calculate the revenue 10 days before the first usage of each coupon
+# Calculate the revenue 10 days before/adter the first usage of each coupon
 revenue_10_days_before = []
 revenue_10_days_after = []
 percentage_inc= []
@@ -36,10 +36,6 @@ first_usage_dates = first_usage_dates.sort_values('Percentage Increase/Decrease'
 first_usage_dates['Percentage Increase/Decrease'] = first_usage_dates['Percentage Increase/Decrease'].apply(lambda x: '{:.2%}'.format(x))
 
 first_usage_dates = first_usage_dates.rename(columns={'coupons':'Coupons','Order Date & Time':'Start Date'})
-# Export the result to an Excel file
-# first_usage_dates.to_excel('output_file.xlsx', index=False)
-
-
 
 existing_file = 'OutputFile.xlsx'
 
